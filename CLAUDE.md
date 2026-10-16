@@ -9,7 +9,7 @@ Starter project for the Code with Mosh Claude Code course: a React 19 + Vite 7 e
 ## Commands
 
 ```bash
-npm install       # install deps
+npm install     in  # install deps
 npm run dev       # Vite dev server at http://localhost:5173
 npm run build     # production build to dist/
 npm run preview   # serve the built dist/
