@@ -28,6 +28,6 @@ Plain JavaScript (JSX, no TypeScript), no router, no state library, no backend o
 - `src/App.jsx` is the entire app in one component: seed transaction data, the add-transaction form, summary cards (income / expenses / balance), type/category filters, and the transactions table. All state is local `useState`; totals and the filtered list are derived on every render.
 - Styling is plain CSS in `src/App.css` (component) and `src/index.css` (globals), using class names like `summary-card`, `income-amount`, `expense-amount`.
 
-Transaction shape: `{ id, description, amount, type: "income" | "expense", category, date: "YYYY-MM-DD" }`. Note that `amount` is stored as a **string** (both in seed data and from the number input), which matters for any arithmetic on it. Categories are a hard-coded array inside `App`.
+Transaction shape: `{ id, description, amount, type: "income" | "expense", category, date: "YYYY-MM-DD" }`. `amount` is a number; the form input yields a string, so `handleSubmit` converts it with `Number()`. Categories are a hard-coded array inside `App`.
 
 ESLint: `no-unused-vars` ignores names matching `^[A-Z_]`; react-hooks and react-refresh (Vite) rules are enabled.
