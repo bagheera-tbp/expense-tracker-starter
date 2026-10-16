@@ -30,11 +30,11 @@ Component tree (`src/main.jsx` mounts `<App />` in `StrictMode`):
 App                 owns transactions state + categories constant
 ├── Summary         props: transactions          → derives income / expenses / balance
 ├── TransactionForm props: categories, onAdd     → local form state, builds new transaction
-└── TransactionList props: transactions, categories → local filter state, renders filtered table
+└── TransactionList props: transactions, categories, onDelete → local filter state, renders filtered table with per-row Delete (confirms first)
 ```
 
 Data flow:
-- `App.jsx` is the single source of truth for `transactions` (seeded with sample data in `useState`). Children never mutate it; `TransactionForm` calls `onAdd(transaction)` and `App` appends with a functional update (`setTransactions(prev => [...prev, t])`).
+- `App.jsx` is the single source of truth for `transactions` (seeded with sample data in `useState`). Children never mutate it; `TransactionForm` calls `onAdd(transaction)` and `App` appends with a functional update (`setTransactions(prev => [...prev, t])`). Likewise `TransactionList` calls `onDelete(id)` after a `window.confirm`, and `App` removes it with `setTransactions(prev => prev.filter(...))`.
 - Totals (`Summary`) and the filtered list (`TransactionList`) are derived on every render from props — nothing derived is stored in state.
 - UI-only state lives in the component that uses it: form inputs in `TransactionForm`, filter selections in `TransactionList`.
 - `categories` is a module-level constant in `App.jsx`, passed down as a prop to the form and list.
